@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    {% if todo.pk %}
+        Edit task
+    {% else %}
+        New task
+    {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    <h1>{% if todo.pk %}
+            Edit task
+        {% else %}
+            Create task
+        {% endif %}
+    </h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary btn-sm">
+            {% if todo.pk %}Update{% else %}Create{% endif %}
+        </button>
+    </form>
+{% endblock content %}

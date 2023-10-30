@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Delete task
+{% endblock page_title %}
+
+{% block content %}
+    <p><strong>ARE YOU SURE YOU WANT TO DELETE THIS TASK? THIS ACTION IS IRREVERSIBLE!</strong></p>
+
+    <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{todo.pk}}</th>
+                    <td scope="row">{{todo.title}}</td>
+                    <td scope="row">{{todo.start_date}}</td>
+                    <td scope="row">{{todo.deadline}}</td>
+                    <td scope="row">{{todo.end_date|default:"-"}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-danger">
+            Delete task
+        </button>
+        <a href="{% url 'todo' %}" class="btn btn-primary">Cancelar</a>
+    </form>
+{% endblock content %}
